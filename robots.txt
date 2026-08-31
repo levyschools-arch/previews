@@ -1,0 +1,4 @@
+# Unsolicited concept previews. Deliberately not indexed so they can never
+# compete with the businesses' own Google listings.
+User-agent: *
+Disallow: /
