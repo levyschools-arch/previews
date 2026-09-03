@@ -20,15 +20,17 @@
 
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display@600,700&f%5B%5D=satoshi@400,500,700&display=swap">
-<link rel="stylesheet" href="styles.css?v=mtklizge">
+<link rel="stylesheet" href="styles.css?v=mtl4hvae">
 <script>document.documentElement.classList.add('js')</script>
-<style>:root{--cream:#F2ECE0;--green:#2B1B14;--gold:#C1432A;--on-accent:#F2ECE0}</style>
+<style>:root{--cream:#F2ECE0;--green:#2B1B14;--gold:#C1432A;--gold2:#D17461;--on-accent:#F2ECE0}</style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BarOrPub","name":"Rocky O'Reilly's","priceRange":"€€","telephone":"+34603563645","address":{"@type":"PostalAddress","streetAddress":"Carril del Siroco 4","addressLocality":"Benalmádena","addressRegion":"Málaga","postalCode":"29630","addressCountry":"ES"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.2","reviewCount":"395"},"url":"https://levyschools-arch.github.io/previews/rocky-oreillys/"}</script>
 </head>
 <body class="accent-dark">
 
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
 
 <header class="nav" id="nav">
   <a class="nav__mark" href="#main">
@@ -59,13 +61,14 @@
       <h2 class="mega mega--gold r" data-r>Big screens<br>and cold pints</h2>
       <div class="say__b r" data-r data-d="1">
         <p class="lead">An Irish pub on Carril del Siroco, just back from the Benalmádena Costa seafront. Big screens for the football, a pool table, and food that runs from breakfast to steak and ribs.</p>
-        <p class="stat"><b>4.2</b> <span>from 395 Google reviews</span></p>
+        <p class="stat"><b class="num" data-count="4.2">4.2</b> <span>from 395 Google reviews</span></p>
         <p class="tags"></p>
       </div>
     </div>
   </section>
 
   <section class="board" id="order">
+    <div class="aur" aria-hidden="true"></div>
     <div class="wrap board__in">
       <div class="board__hd r" data-r>
         <p class="eye eye--gold">Good to know</p>
@@ -100,7 +103,14 @@
     </div>
   </section>
 
+  <!-- The dishes reviewers actually named, moving past. Duplicated by site.js
+       so the loop is seamless; if that never runs it simply sits still. -->
+  <section class="mq" aria-hidden="true">
+    <div class="mq__t" id="mq"><span>Irish breakfast, made with imported bacon and sausage<i>&#9670;</i></span><span>Burgers, ribs and steaks<i>&#9670;</i></span><span>Big screens for football<i>&#9670;</i></span><span>Pool table<i>&#9670;</i></span><span>4.2 stars from 395 reviews<i>&#9670;</i></span></div>
+  </section>
+
   <section class="gold" id="find">
+    <div class="aur" aria-hidden="true"></div>
     <div class="wrap gold__in">
       <div class="r" data-r>
         <p class="eye">Find us</p>
@@ -129,6 +139,6 @@
   </div>
 </footer>
 
-<script src="site.js?v=mtklizge"></script>
+<script src="site.js?v=mtl4hvae"></script>
 </body>
 </html>

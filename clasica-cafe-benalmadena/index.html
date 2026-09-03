@@ -20,15 +20,17 @@
 
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display@600,700&f%5B%5D=satoshi@400,500,700&display=swap">
-<link rel="stylesheet" href="styles.css?v=mtklizge">
+<link rel="stylesheet" href="styles.css?v=mtl4hvae">
 <script>document.documentElement.classList.add('js')</script>
-<style>:root{--cream:#F6F3EE;--green:#1C1713;--gold:#A6572F;--on-accent:#F6F3EE}</style>
+<style>:root{--cream:#F6F3EE;--green:#1C1713;--gold:#A6572F;--gold2:#BD8365;--on-accent:#F6F3EE}</style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Clásica Cafe","servesCuisine":["Cafe","Breakfast"],"priceRange":"€","telephone":"+34951533110","address":{"@type":"PostalAddress","streetAddress":"Av. de la Constitución 26, Loc 8","addressLocality":"Benalmádena","addressRegion":"Málaga","postalCode":"29631","addressCountry":"ES"},"geo":{"@type":"GeoCoordinates","latitude":36.6007,"longitude":-4.52834},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"1083"},"url":"https://levyschools-arch.github.io/previews/clasica-cafe-benalmadena/"}</script>
 </head>
 <body class="accent-dark">
 
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
 
 <header class="nav" id="nav">
   <a class="nav__mark" href="#main">
@@ -59,13 +61,14 @@
       <h2 class="mega mega--gold r" data-r>Coffee, and<br>those pancakes</h2>
       <div class="say__b r" data-r data-d="1">
         <p class="lead">A café on Avenida de la Constitución in Arroyo de la Miel. Breakfast, coffee and a welcome in both languages — 4.9 stars across more than a thousand reviews.</p>
-        <p class="stat"><b>4.9</b> <span>from 1083 Google reviews</span></p>
+        <p class="stat"><b class="num" data-count="4.9">4.9</b> <span>from 1083 Google reviews</span></p>
         <p class="tags"><span>Dine in</span><span>Delivery</span></p>
       </div>
     </div>
   </section>
 
   <section class="board" id="order">
+    <div class="aur" aria-hidden="true"></div>
     <div class="wrap board__in">
       <div class="board__hd r" data-r>
         <p class="eye eye--gold">What people order</p>
@@ -109,7 +112,14 @@
     </div>
   </section>
 
+  <!-- The dishes reviewers actually named, moving past. Duplicated by site.js
+       so the loop is seamless; if that never runs it simply sits still. -->
+  <section class="mq" aria-hidden="true">
+    <div class="mq__t" id="mq"><span>Pancakes<i>&#9670;</i></span><span>Coffee<i>&#9670;</i></span><span>Breakfast<i>&#9670;</i></span><span>Family-friendly plates<i>&#9670;</i></span></div>
+  </section>
+
   <section class="gold" id="find">
+    <div class="aur" aria-hidden="true"></div>
     <div class="wrap gold__in">
       <div class="r" data-r>
         <p class="eye">Find us</p>
@@ -138,6 +148,6 @@
   </div>
 </footer>
 
-<script src="site.js?v=mtklizge"></script>
+<script src="site.js?v=mtl4hvae"></script>
 </body>
 </html>

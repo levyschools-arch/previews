@@ -129,9 +129,15 @@ function scrollFx() {
   const nav = document.getElementById('nav');
   let ticking = false;
 
+  const prog = document.getElementById('prog');
+
   const run = () => {
     const y = window.scrollY || document.documentElement.scrollTop;
     if (nav) nav.classList.toggle('is-stuck', y > 60);
+    if (prog) {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      prog.style.width = (max > 0 ? Math.min(100, y / max * 100) : 0) + '%';
+    }
     if (!reduced) layers.forEach(l => { l.el.style.transform = `translate3d(0, ${y * l.rate}px, 0)`; });
     ticking = false;
   };
@@ -142,10 +148,60 @@ function scrollFx() {
   run();
 }
 
+/* The marquee scrolls exactly -50%, so the strip has to contain the list twice
+   or the loop visibly jumps. Duplicating in JS keeps the markup honest. */
+function marquee() {
+  const t = document.getElementById('mq');
+  if (!t || reduced || t.dataset.doubled) return;
+  t.innerHTML += t.innerHTML;
+  t.dataset.doubled = '1';
+}
+
+/* Count a number up once, when it first comes into view.
+
+   This number is a factual claim about the business, so it must never be left
+   showing a partial value. requestAnimationFrame stops in a background or
+   hidden tab, which would strand a 4.8 rating reading "4.3" indefinitely — so a
+   timer and a visibility handler both force the true figure regardless. */
+function countUp(el) {
+  const target = parseFloat(el.dataset.count);
+  if (!isFinite(target)) return;
+  const dec = (el.dataset.count.split('.')[1] || '').length;
+  const exact = () => { el.textContent = target.toFixed(dec); };
+  const started = performance.now();
+  const dur = 1100;
+
+  const step = now => {
+    const p = Math.min(1, (now - started) / dur);
+    if (p >= 1) return exact();
+    el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec);
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+
+  setTimeout(exact, dur + 500);
+  addEventListener('visibilitychange', exact, { once: true });
+}
+
+function numbers() {
+  const els = document.querySelectorAll('[data-count]');
+  /* Never leave a real figure animating-or-absent: reduced motion prints it. */
+  if (reduced) {
+    els.forEach(el => { el.textContent = parseFloat(el.dataset.count).toFixed((el.dataset.count.split('.')[1] || '').length); });
+    return;
+  }
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { countUp(e.target); io.unobserve(e.target); } });
+  }, { threshold: .5 });
+  els.forEach(el => io.observe(el));
+}
+
 paintHours();
 setInterval(paintHours, 60000);
 reveals();
 scrollFx();
+marquee();
+numbers();
 
 /* ── Self-check: append ?selftest to the URL ─────────── */
 if (location.search.includes('selftest')) {
@@ -160,4 +216,12 @@ if (location.search.includes('selftest')) {
   eq(fmt(24 * 60 + 30), '00.30', 'fmt wraps past midnight');
   eq(document.getElementById('status').hidden, true, 'live badge hidden while hours unconfirmed');
   eq(!!document.getElementById('hours-fallback'), true, 'Google hours link shown instead');
+
+  /* The rating must settle on the real figure even if the animation never ran. */
+  const n = document.querySelector('[data-count]');
+  setTimeout(() => {
+    eq(n.textContent, parseFloat(n.dataset.count).toFixed((n.dataset.count.split('.')[1] || '').length),
+      'rating lands on the true figure');
+  }, 2000);
+  eq(document.getElementById('mq').dataset.doubled === '1' || reduced, true, 'marquee doubled for a seamless loop');
 }

@@ -232,3 +232,73 @@ a{color:inherit;text-decoration:none}
   .pill,.nav,.nav__mark,.live{transition:none}
   .plx{transform:none!important}
 }
+
+/* ── Premium motion ───────────────────────────────────────
+   Ten pages off one template read as ten copies, so the colour
+   scheme changes per site and the solid blocks are given slow
+   movement. Everything here is decoration: it sits behind the
+   content, is disabled wholesale under prefers-reduced-motion,
+   and the page reads correctly if none of it ever runs.
+
+   Deliberately NOT used: gradient-clipped heading text. The
+   headings are split into per-word spans for the dissolve, and
+   background-clip:text across those children risks rendering a
+   heading invisible — the one failure the visitor cannot recover
+   from. Movement goes behind the words, never through them.
+   ───────────────────────────────────────────────────────── */
+
+/* Two slow radial washes drifting behind a solid block. */
+.aur{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.aur::before,.aur::after{
+  content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;
+  filter:blur(70px);will-change:transform;
+}
+.aur::before{
+  background:radial-gradient(circle,var(--gold) 0%,transparent 62%);
+  top:-30%;left:-18%;opacity:.42;
+  animation:drift1 26s ease-in-out infinite alternate;
+}
+.aur::after{
+  background:radial-gradient(circle,var(--gold2) 0%,transparent 62%);
+  bottom:-34%;right:-22%;opacity:.34;
+  animation:drift2 34s ease-in-out infinite alternate;
+}
+@keyframes drift1{from{transform:translate3d(0,0,0) scale(1)}   to{transform:translate3d(13%,9%,0) scale(1.28)}}
+@keyframes drift2{from{transform:translate3d(0,0,0) scale(1.12)}to{transform:translate3d(-11%,-9%,0) scale(.92)}}
+
+/* The blocks that carry an aurora need their content lifted above it. */
+.board,.gold{position:relative;overflow:hidden}
+.board__in,.gold__in{position:relative;z-index:1}
+
+/* On the accent block the wash is the accent's own second tone, so it reads
+   as the colour breathing rather than as a second colour laid on top. */
+.gold .aur::before{opacity:.30}
+.gold .aur::after{opacity:.26}
+
+/* Marquee — the dishes people actually named, moving slowly. */
+.mq{background:var(--green);color:var(--cream);padding:16px 0;overflow:hidden}
+.mq__t{display:flex;gap:38px;width:max-content;will-change:transform;animation:mq 42s linear infinite}
+.mq__t span{
+  font-family:var(--disp);font-weight:600;white-space:nowrap;
+  font-size:clamp(19px,2.2vw,30px);letter-spacing:.01em;opacity:.92;
+}
+.mq__t i{color:var(--gold);font-style:normal;margin-left:38px}
+@keyframes mq{to{transform:translate3d(-50%,0,0)}}
+.mq:hover .mq__t{animation-play-state:paused}
+
+/* Scroll progress rail. */
+.prog{position:fixed;top:0;left:0;height:2px;width:100%;z-index:80;background:transparent;pointer-events:none}
+.prog i{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width .12s linear;
+}
+
+/* Counting numbers hold their width so the layout cannot jump as they run. */
+.num{font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){
+  .aur{display:none}
+  .mq__t{animation:none}
+  .prog{display:none}
+}
