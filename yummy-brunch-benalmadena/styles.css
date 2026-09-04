@@ -1,0 +1,304 @@
+/* ── The Anchor ──────────────────────────────────────────
+   Built to Paput's system: three colours, one heavy grotesk
+   at huge sizes in caps, cream default punctuated by solid
+   colour blocks, photography-led, soft scroll reveals.
+   ───────────────────────────────────────────────────── */
+
+:root{
+  --cream:#F4F3E6;
+  --green:#0A4635;
+  --gold:#FFC62D;
+  --ink:#0E1512;
+  --green-70:rgba(10,70,53,.7);
+  --green-40:rgba(10,70,53,.4);
+  --green-14:rgba(10,70,53,.14);
+
+  --disp:"Clash Display","Archivo Black",system-ui,sans-serif;
+  --body:"Satoshi",system-ui,sans-serif;
+
+  --pad:clamp(20px,5vw,72px);
+  --max:1280px;
+  --e:cubic-bezier(.16,.84,.44,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--green);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;background:var(--green);color:var(--cream);padding:10px 16px;z-index:99}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ── Type scale ──────────────────────────────────────── */
+.mega{
+  font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  font-size:clamp(38px,7.4vw,104px);line-height:.92;letter-spacing:-.022em;
+  margin:0 0 22px;
+}
+.mega--gold{color:var(--gold)}
+.mega--c{text-align:center;margin-bottom:44px}
+.big{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(34px,5.4vw,74px);line-height:.94;letter-spacing:-.02em;margin:0}
+.eye{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 14px;opacity:.62}
+.eye--gold{color:var(--gold);opacity:1}
+.lead{font-size:clamp(16px,1.5vw,19px);line-height:1.6;max-width:44ch;margin:0 0 22px}
+
+.pill{
+  display:inline-block;font-family:var(--body);font-weight:700;font-size:14px;
+  background:var(--gold);color:var(--on-accent);padding:13px 26px;border-radius:999px;
+  transition:transform .3s var(--e),background .3s var(--e);
+}
+.pill:hover{transform:translateY(-2px);background:#FFD35C}
+.pill--lg{font-size:15px;padding:16px 34px}
+.pill--dark{background:var(--green);color:var(--cream)}
+.pill--dark:hover{background:#0d5a44}
+.pill--out{background:transparent;color:var(--green);box-shadow:inset 0 0 0 2px var(--green)}
+.pill--out:hover{background:var(--green);color:var(--gold)}
+
+/* ── Nav ─────────────────────────────────────────────── */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px var(--pad);
+  background:transparent;transition:background .4s var(--e),padding .4s var(--e);
+}
+.nav.is-stuck{background:var(--cream);padding:10px var(--pad);box-shadow:0 1px 0 var(--green-14)}
+.nav__mark{display:flex;align-items:center;gap:9px;color:var(--cream);transition:color .4s var(--e)}
+.nav.is-stuck .nav__mark{color:var(--green)}
+.nav__mark svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.nav__mark span{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.nav__r{display:flex;align-items:center;gap:14px}
+
+.live{display:flex;align-items:center;gap:7px;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);transition:color .4s var(--e)}
+.nav.is-stuck .live{color:var(--green-70)}
+.live i{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.live[data-state="open"] i{background:var(--gold);box-shadow:0 0 0 4px rgba(255,198,45,.22)}
+
+/* ── Hero ────────────────────────────────────────────── */
+.hero{position:relative;height:min(112vh,1000px);overflow:hidden;display:grid;place-items:center}
+/* Three parallax depths: photo, scrim, copy — each on its own rate. */
+.plx{will-change:transform}
+.hero > .plx:first-child{position:absolute;inset:-12% 0}
+.hero__media{position:absolute;inset:0}
+.hero__media img{width:100%;height:100%;object-fit:cover}
+.hero__scrim{position:absolute;inset:-12% 0;background:linear-gradient(180deg,rgba(10,21,18,.5),rgba(10,21,18,.2) 40%,rgba(10,21,18,.72))}
+.hero__mid{position:relative;text-align:center;padding:0 var(--pad);color:var(--cream)}
+.hero__sub{font-weight:700;font-size:12px;letter-spacing:.26em;text-transform:uppercase;opacity:.85;margin:0 0 26px}
+.hero__eye{font-weight:700;font-size:12px;letter-spacing:.26em;text-transform:uppercase;margin:0 0 18px;opacity:.9}
+.hero__h{
+  font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  font-size:clamp(52px,11.5vw,168px);line-height:.9;letter-spacing:-.03em;
+  margin:0 0 30px;
+}
+
+/* ── Statement ───────────────────────────────────────── */
+.say{padding:clamp(72px,11vw,152px) 0}
+.say__in{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:end}
+.say__b .lead{margin-bottom:16px}
+.stat{display:flex;align-items:baseline;gap:12px;margin:0;padding-top:18px;border-top:2px solid var(--green-14)}
+.stat b{font-family:var(--disp);font-weight:700;font-size:clamp(38px,4.4vw,58px);line-height:1}
+.stat span{font-size:14px;opacity:.7;max-width:14ch}
+
+/* ── Board (green block) ─────────────────────────────── */
+.board{background:var(--green);color:var(--cream);padding:clamp(60px,8vw,110px) 0}
+.board__in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.board__hd .big{color:var(--cream)}
+.board__live{font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:16px 0 0}
+.fix{list-style:none;margin:0;padding:0}
+.fix li{display:flex;align-items:baseline;gap:20px;padding:18px 0;border-bottom:1px solid rgba(244,243,230,.18)}
+.fix li:first-child{border-top:1px solid rgba(244,243,230,.18)}
+.fix span{font-family:var(--disp);font-weight:600;font-size:clamp(20px,2.2vw,30px);color:var(--gold);flex:none;width:104px}
+.fix b{font-weight:500;font-size:clamp(15px,1.5vw,19px)}
+
+/* ── Split ───────────────────────────────────────────── */
+.split{padding:clamp(72px,11vw,152px) 0}
+.split__in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,76px);align-items:center}
+.split__f{margin:0;overflow:hidden;border-radius:4px}
+.split__f img{aspect-ratio:4/3;object-fit:cover;transform:scale(1.02)}
+.week{list-style:none;margin:0;padding:0}
+.week li{display:flex;gap:20px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--green-14)}
+.week span{font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-40);flex:none;width:96px}
+.week b{font-weight:500;font-size:16.5px}
+
+/* ── Kitchen ─────────────────────────────────────────── */
+.kit{padding:0 0 clamp(72px,11vw,152px)}
+.kit__g{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,32px)}
+.kit__g figure{margin:0}
+.kit__g img{aspect-ratio:3/2;object-fit:cover;border-radius:4px}
+.kit__g figcaption{font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-40);margin-top:14px}
+
+/* ── Gold block ──────────────────────────────────────── */
+.gold{background:var(--gold);color:var(--on-accent);padding:clamp(64px,9vw,128px) 0}
+.gold__in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:start}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.hrs table{width:100%;border-collapse:collapse;font-size:14.5px}
+.hrs td{padding:11px 0;border-bottom:1px solid color-mix(in srgb,var(--on-accent) 22%,transparent)}
+.hrs td:last-child{text-align:right;font-weight:700}
+.hrs tr[data-today] td{font-weight:700}
+.hrs tr[data-today] td:first-child::before{content:"→ "}
+.hrs__n{font-size:13px;opacity:.7;margin:14px 0 0}
+
+/* Dark accents invert the controls that sit on top of the accent. Scoped to
+   .accent-dark so light-accent pages keep the exact styling they shipped with. */
+.accent-dark .pill:hover{background:var(--gold);filter:brightness(1.14)}
+.accent-dark .gold .pill--dark{background:var(--on-accent);color:var(--gold)}
+.accent-dark .gold .pill--dark:hover{filter:brightness(.94)}
+.accent-dark .gold .pill--out{color:var(--on-accent);box-shadow:inset 0 0 0 2px var(--on-accent)}
+.accent-dark .gold .pill--out:hover{background:var(--on-accent);color:var(--gold)}
+.accent-dark .gold a{color:var(--on-accent)}
+
+/* ── Tags ────────────────────────────────────────────── */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0}
+.tags span{
+  font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 14px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--green-14);
+}
+
+/* ── Reviews ─────────────────────────────────────────── */
+.revs{padding:0 0 clamp(72px,11vw,152px)}
+.revs .mega{margin-bottom:44px}
+.revs__g{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,30px)}
+.rev{margin:0;padding:28px 26px;background:rgba(10,70,53,.05);border-radius:4px;display:flex;flex-direction:column}
+.rev blockquote{margin:0 0 18px;font-size:16.5px;line-height:1.55;text-wrap:pretty}
+.rev figcaption{margin-top:auto;font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-40)}
+.rev figcaption span{color:var(--gold);letter-spacing:.1em}
+.revs__src{margin:30px 0 0}
+.revs__src a{font-weight:700;font-size:14px;border-bottom:2px solid var(--gold);padding-bottom:2px}
+
+.hrs__fallback{margin:0 0 14px}
+.hrs__fallback a{font-weight:700;font-size:15px;border-bottom:2px solid var(--green);padding-bottom:2px}
+
+/* ── Foot ────────────────────────────────────────────── */
+.foot{background:var(--green);color:rgba(244,243,230,.72);padding:28px 0 34px}
+.foot__in{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.foot__m{font-weight:500;font-size:13px;letter-spacing:.08em}
+.foot__m a:hover{color:var(--gold)}
+
+/* ── Dissolve reveals ────────────────────────────────────
+   Blocks resolve out of a blur rather than sliding in, so the
+   page reads as developing rather than assembling. */
+.js [data-r]{
+  opacity:0;filter:blur(12px);transform:translateY(26px) scale(.992);
+  transition:opacity 1s var(--e),filter 1s var(--e),transform 1s var(--e);
+  transition-delay:calc(var(--d,0) * 120ms);
+}
+.js [data-r].in{opacity:1;filter:blur(0);transform:none}
+
+/* Images resolve slower and from further out than their container. */
+.js figure{overflow:hidden}
+.js [data-r] img,.js figure[data-r] img{
+  transform:scale(1.08);filter:blur(10px);
+  transition:transform 1.5s var(--e),filter 1.2s var(--e);
+  transition-delay:calc(var(--d,0) * 120ms);
+}
+.js [data-r].in img,.js figure[data-r].in img{transform:none;filter:blur(0)}
+
+/* Headings dissolve word by word. */
+.js .sw{opacity:1;filter:none;transform:none}
+.js .sw .w{
+  display:inline-block;opacity:0;filter:blur(11px);transform:translateY(.34em);
+  transition:opacity .85s var(--e),filter .85s var(--e),transform .85s var(--e);
+  transition-delay:calc(var(--i,0) * 52ms);
+  will-change:opacity,filter,transform;
+}
+.js .sw.in .w{opacity:1;filter:blur(0);transform:none}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width:900px){
+  .say__in,.board__in,.split__in,.gold__in{grid-template-columns:1fr}
+  .say__in{align-items:start}
+  .split__f{order:-1}
+  .hero{height:min(92vh,760px)}
+}
+@media (max-width:900px){
+  .revs__g{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .kit__g{grid-template-columns:1fr}
+  .fix span{width:76px}
+  .week span{width:80px}
+  .foot__in{flex-direction:column;gap:6px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  [data-r]{opacity:1;transform:none;transition:none}
+  .pill,.nav,.nav__mark,.live{transition:none}
+  .plx{transform:none!important}
+}
+
+/* ── Premium motion ───────────────────────────────────────
+   Ten pages off one template read as ten copies, so the colour
+   scheme changes per site and the solid blocks are given slow
+   movement. Everything here is decoration: it sits behind the
+   content, is disabled wholesale under prefers-reduced-motion,
+   and the page reads correctly if none of it ever runs.
+
+   Deliberately NOT used: gradient-clipped heading text. The
+   headings are split into per-word spans for the dissolve, and
+   background-clip:text across those children risks rendering a
+   heading invisible — the one failure the visitor cannot recover
+   from. Movement goes behind the words, never through them.
+   ───────────────────────────────────────────────────────── */
+
+/* Two slow radial washes drifting behind a solid block. */
+.aur{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.aur::before,.aur::after{
+  content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;
+  filter:blur(70px);will-change:transform;
+}
+.aur::before{
+  background:radial-gradient(circle,var(--gold) 0%,transparent 62%);
+  top:-30%;left:-18%;opacity:.42;
+  animation:drift1 26s ease-in-out infinite alternate;
+}
+.aur::after{
+  background:radial-gradient(circle,var(--gold2) 0%,transparent 62%);
+  bottom:-34%;right:-22%;opacity:.34;
+  animation:drift2 34s ease-in-out infinite alternate;
+}
+@keyframes drift1{from{transform:translate3d(0,0,0) scale(1)}   to{transform:translate3d(13%,9%,0) scale(1.28)}}
+@keyframes drift2{from{transform:translate3d(0,0,0) scale(1.12)}to{transform:translate3d(-11%,-9%,0) scale(.92)}}
+
+/* The blocks that carry an aurora need their content lifted above it. */
+.board,.gold{position:relative;overflow:hidden}
+.board__in,.gold__in{position:relative;z-index:1}
+
+/* On the accent block the wash is the accent's own second tone, so it reads
+   as the colour breathing rather than as a second colour laid on top. */
+.gold .aur::before{opacity:.30}
+.gold .aur::after{opacity:.26}
+
+/* Marquee — the dishes people actually named, moving slowly. */
+.mq{background:var(--green);color:var(--cream);padding:16px 0;overflow:hidden}
+.mq__t{display:flex;gap:38px;width:max-content;will-change:transform;animation:mq 42s linear infinite}
+.mq__t span{
+  font-family:var(--disp);font-weight:600;white-space:nowrap;
+  font-size:clamp(19px,2.2vw,30px);letter-spacing:.01em;opacity:.92;
+}
+.mq__t i{color:var(--gold);font-style:normal;margin-left:38px}
+@keyframes mq{to{transform:translate3d(-50%,0,0)}}
+.mq:hover .mq__t{animation-play-state:paused}
+
+/* Scroll progress rail. */
+.prog{position:fixed;top:0;left:0;height:2px;width:100%;z-index:80;background:transparent;pointer-events:none}
+.prog i{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width .12s linear;
+}
+
+/* Counting numbers hold their width so the layout cannot jump as they run. */
+.num{font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){
+  .aur{display:none}
+  .mq__t{animation:none}
+  .prog{display:none}
+}
